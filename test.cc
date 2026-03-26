@@ -2,15 +2,34 @@
 #include <iostream>
 #include <string>
 #include <vector>
-int main(){
-    std::cout << "hello world" << "\n";
-    std::vector<int> nums{3, 7, 9, 13, 17};
+#include <map>
 
-    for (std::vector<int>::iterator it = nums.begin(); it != nums.end(); ++it){
-        *it *= 2;
+int main(){
+    std::map<std::string, double> prices = {
+        {"banana", 0.99},
+        {"apple", 1.49},
+        {"pear", 1.29}
+    };
+
+    std::string fruit;
+    double price;
+
+    while (true) {
+        std::cout << "Enter a fruit name (or 'done' to quit): ";
+        std::cin >> fruit;
+        if (fruit == "done") {
+            break;
+        }
+
+        std::cout << "Enter price for " << fruit << ": ";
+        std::cin >> price;
+        prices[fruit] = price;
     }
-    for (auto it = nums.cbegin(); it != nums.cend(); ++it){
-        std::cout << *it << "\n";
+
+    std::cout << "\nFruit prices:\n";
+    for (const auto& [name, p] : prices) {
+        std::cout << "  " << name << ": $" << p << "\n";
     }
+    
     return 0;
 }
